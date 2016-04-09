@@ -79,4 +79,5 @@ class ArticleSearch extends Article
     		->all();
     	return $children;
     }
-}
+     
+ }
