@@ -12,6 +12,9 @@ use Yii;
  * @property string $title
  * @property string $content
  * @property string $timestamp
+ *
+ * @property TagArticle[] $tagArticles
+ * @property Tag[] $tags
  */
 class Article extends \yii\db\ActiveRecord
 {
@@ -30,7 +33,8 @@ class Article extends \yii\db\ActiveRecord
     {
         return [
             [['parent'], 'integer'],
-            [['title', 'content'], 'required'],
+            [['title'], 'required'],
+            [['content'], 'string'],
             [['timestamp'], 'safe'],
             [['title'], 'string', 'max' => 255]
         ];
@@ -48,6 +52,22 @@ class Article extends \yii\db\ActiveRecord
             'content' => 'Content',
             'timestamp' => 'Timestamp',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTagArticles()
+    {
+        return $this->hasMany(TagArticle::className(), ['article_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTags()
+    {
+        return $this->hasMany(Tag::className(), ['id' => 'tag_id'])->viaTable('tag_article', ['article_id' => 'id']);
     }
 
     /**
