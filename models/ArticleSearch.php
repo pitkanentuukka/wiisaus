@@ -66,4 +66,17 @@ class ArticleSearch extends Article
 
         return $dataProvider;
     }
+    
+    /**
+     * Finds children by id
+     * 
+     */
+    public function findChildrenById($id) 
+    {
+    	$children = Article::find()
+    		->where(['parent'=>$id])
+    		->orderBy(['timestamp'])
+    		->all();
+    	return $children;
+    }
 }
