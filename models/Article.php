@@ -32,7 +32,7 @@ class Article extends \yii\db\ActiveRecord
             [['parent'], 'integer'],
             [['title', 'content'], 'required'],
             [['timestamp'], 'safe'],
-            [['title', 'content'], 'string', 'max' => 255]
+            [['title'], 'string', 'max' => 255]
         ];
     }
 
